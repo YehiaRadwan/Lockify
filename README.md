@@ -1,21 +1,57 @@
-# Lockify (iPhone MVP)
+# Lockify (Flutter Android MVP)
 
-Lockify is a local-only proof-of-work screen-time limiter MVP built with SwiftUI.
+Lockify is a local-only proof-of-work screen-time limiter MVP built with Flutter for Android.
 
-## What this MVP includes
-- Locked home screen by default (daily reset re-locks the app)
-- Proof submission flow (text/photo/document placeholders)
-- Local unlock duration estimation from user-provided work estimate
-- Timed unlock session with countdown and automatic re-lock
-- Local unlock session history (stored in `UserDefaults`)
-- Compile-safe Screen Time integration scaffolding (`FamilyControls`, `ManagedSettings`, `DeviceActivity`) behind abstractions/placeholders
+## MVP features
+- Locked home screen by default
+- Proof-of-work submission flow (text/photo/document placeholders)
+- Local unlock duration estimation from user work estimate
+- Timed unlock session countdown with automatic re-lock
+- Daily reset that re-locks the app
+- Local unlock session history (`SharedPreferences`)
+- Restriction integration scaffold (`NoopRestrictionBridge`) for future platform APIs
 
-## Run on iPhone (Xcode)
-1. Open `/home/runner/work/Lockify/Lockify/Lockify.xcodeproj` in Xcode 15+.
-2. In **Signing & Capabilities**, set your personal Team and a unique bundle identifier if needed.
-3. Connect your iPhone, trust the developer certificate if prompted.
-4. Select your iPhone as the run destination.
-5. Build and Run.
+## Project setup
+This repository contains Flutter source files. If `android/` is missing, generate platform files first:
 
-> The app runs as a local-only demo without Screen Time entitlements.
-> `ScreenTimeBridge.swift` is where entitlement-gated integration can be expanded later.
+```bash
+cd /home/runner/work/Lockify/Lockify
+flutter create . --platforms=android
+```
+
+Then fetch dependencies:
+
+```bash
+cd /home/runner/work/Lockify/Lockify
+flutter pub get
+```
+
+## Run on Android device
+```bash
+cd /home/runner/work/Lockify/Lockify
+flutter run
+```
+
+## Run on BlueStacks (Windows)
+1. Install Flutter SDK + Android SDK on Windows.
+2. Start BlueStacks and enable ADB from BlueStacks settings.
+3. Verify emulator connection:
+   ```bash
+   adb devices
+   ```
+4. Build debug APK:
+   ```bash
+   cd /home/runner/work/Lockify/Lockify
+   flutter build apk --debug
+   ```
+5. Install APK to BlueStacks:
+   ```bash
+   adb install -r build/app/outputs/flutter-apk/app-debug.apk
+   ```
+6. Open **Lockify** inside BlueStacks.
+
+## Optional direct emulator run (if Flutter detects BlueStacks)
+```bash
+flutter devices
+flutter run -d <device-id>
+```
