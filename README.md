@@ -81,3 +81,8 @@ Lockify/
 ├── pubspec.yaml   # Dependencies and Flutter configuration
 └── README.md
 ```
+## Notes for contributors
+
+- Do not commit `android/local.properties`, Gradle caches, build outputs, signing keys, or other machine-specific files.
+- Keep `pubspec.lock` committed so contributors resolve the same dependency versions.
+- The Gradle wrapper files under `android/gradle/wrapper/` and `android/gradlew*` are part of the project and should remain in version control.
